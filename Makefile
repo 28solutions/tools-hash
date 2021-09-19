@@ -1,7 +1,7 @@
 namespace = 28solutions
 image = tools-hash
 
-.PHONY: build check-version
+.PHONY: build push check-version
 
 build: check-version
 	docker build . \
