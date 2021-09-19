@@ -6,6 +6,11 @@ if (!port) {
     throw new Error("Can't read port configuration");
 }
 
+process.on("SIGTERM", () => {
+    console.log("SIGTERM received");
+    process.exit(0);
+});
+
 http.createServer((req, res) => {
     const hash = crypto.createHash("md5");
 
