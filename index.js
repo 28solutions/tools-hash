@@ -6,17 +6,17 @@ if (!port)
 	throw new Error("Can't read port configuration");
 
 http.createServer(function (req, res) {
-  var data = "";
+  const hash = crypto.createHash('md5');
 
   req.on('data', function(chunk) {
-    data += chunk;
+    hash.update(chunk);
   });
 
   req.on('end', function() {
-    const hash = crypto.createHash('md5').update(data).digest("hex");
+    const digest = hash.digest("hex");
 
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end(hash + '\n');
+    res.end(digest + '\n');
   });
 }).listen(port, '0.0.0.0');
 
